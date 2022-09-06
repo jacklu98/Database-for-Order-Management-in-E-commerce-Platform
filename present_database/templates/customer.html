@@ -1,0 +1,79 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+    <p>
+    <table border="1">
+        <tbody>
+                <tr bgcolor="lightgray">
+                    <td><a href="/">INDEX</a></td>
+                    <td><a href="employee">EMPLOYEE</a></td>
+	                	<td><a href="department">DEPARTMENT_PRODUCT</a></td>
+	                	<td><a href="customer">CUSTOMER</a></td>
+	                	<td><a href="product">PRODUCT</a></td>
+	                	<td><a href="deal">DEAL</a></td>
+	                	<td><a href="cart">CART</a></td>
+	                	<td><a href="order">ORDER</a></td>
+      							<tr/>
+      					<tr bgcolor="lightgray">
+	                	<td><a href="order_manage">ORDER_MANAGE</a></td>
+	                	<td><a href="create_c_o">ORDER_FROM_CART</a></td>
+	                	<td><a href="create_p_o">ORDER_FROM_PRODUCT</a></td>
+	                	<td><a href="select">SELECT</a></td>
+	                	<td><a href="show">SHOW</a></td>
+	                	<td><a href="product_manage">PRODUCT_MANAGE</a></td>
+	                	<td><a href="deside">DESIDE</a></td>
+	                	<td><a href="monitor">MONITOR</a></td>
+                </tr>
+        </tbody>
+    </table>
+    </p>
+
+    <h1>customer</h1>
+
+    <table border="1">
+        <thead>
+            <tr bgcolor="#f0f8ff">
+                <td>customer id</td>
+                <td>customer city</td>
+                <td>customer country</td>
+                <td>customer zipcode</td>
+                <td>customer timezone</td>
+                <td>gender</td>
+                <td>membership</td>
+                <td>phone number</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datas %}
+                <tr>
+                    <td>{{ data.customer_id }}</td>
+                    <td>{{ data.customer_country }}</td>
+                    <td>{{ data.customer_city }}</td>
+                    <td>{{ data.customer_zipcode }}</td>
+                    <td>{{ data.customer_timezone }}</td>
+                    <td>{{ data.gender }}</td>
+                    <td>{{ data.membership }}</td>
+                    <td>{{ data.phone_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+    {% for n in data %}
+    <div>{{n}}</div>
+    {% endfor %}
+    </div>
+
+
+</body>
+
+
+</html>

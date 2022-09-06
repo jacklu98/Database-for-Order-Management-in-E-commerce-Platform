@@ -1,0 +1,102 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<script>
+
+    function toUpdate(o_id,total_price,created_date,order_city,order_country,order_zipcode){
+        document.getElementById("add_or_update_form").action="/order_update";
+        document.getElementById("o_id").value=o_id;
+        document.getElementById("total_price").value=total_price;
+        document.getElementById("created_date").value=created_date;
+        document.getElementById("order_city").value=order_city;
+        document.getElementById("order_country").value=order_country;
+        document.getElementById("order_zipcode").value=order_zipcode;
+        document.getElementById("add_or_update_btn").value="update";
+    }
+
+</script>
+
+
+<body>
+    <p>
+    <table border="1">
+        <tbody>
+                <tr bgcolor="lightgray">
+                    <td><a href="/">INDEX</a></td>
+                    <td><a href="employee">EMPLOYEE</a></td>
+	                	<td><a href="department">DEPARTMENT_PRODUCT</a></td>
+	                	<td><a href="customer">CUSTOMER</a></td>
+	                	<td><a href="product">PRODUCT</a></td>
+	                	<td><a href="deal">DEAL</a></td>
+	                	<td><a href="cart">CART</a></td>
+	                	<td><a href="order">ORDER</a></td>
+      							<tr/>
+      					<tr bgcolor="lightgray">
+	                	<td><a href="order_manage">ORDER_MANAGE</a></td>
+	                	<td><a href="create_c_o">ORDER_FROM_CART</a></td>
+	                	<td><a href="create_p_o">ORDER_FROM_PRODUCT</a></td>
+	                	<td><a href="select">SELECT</a></td>
+	                	<td><a href="show">SHOW</a></td>
+	                	<td><a href="product_manage">PRODUCT_MANAGE</a></td>
+	                	<td><a href="deside">DESIDE</a></td>
+	                	<td><a href="monitor">MONITOR</a></td>
+                </tr>
+        </tbody>
+    </table>
+    </p>
+
+    <h1>order</h1>
+
+    <table border="1">
+        <thead>
+            <tr bgcolor="#f0f8ff">
+                <td>order id</td>
+                <td>total price</td>
+                <td>created date</td>
+                <td>order country</td>
+                <td>order city</td>
+                <td>order zip code</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datas %}
+                <tr>
+                    <td>{{ data.o_id }}</td>
+                    <td>{{ data.total_price }}</td>
+                    <td>{{ data.created_date }}</td>
+                    <td>{{ data.order_country }}</td>
+                    <td>{{ data.order_city }}</td>
+                    <td>{{ data.order_zipcode }}</td>
+                    <td>
+                        <input type="button" value="update" onclick="javascript:toUpdate('{{ data.o_id }}','{{ data.total_price }}',
+                        '{{ data.created_date }}','{{ data.order_country }}','{{ data.order_city }}',{{ data.order_zipcode }});"/>
+                        <a href="/order_delete?o_id={{data.o_id}}">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<hr/>
+
+<div>
+    <form id="add_or_update_form" action="/order_add" method="post">
+        <div><span class="p_name">o_id:</span> <input type="text" id="o_id" name="o_id" class="p_value"/> </div>
+        <div><span class="p_name">total_price:</span> <input type="text" id="total_price" name="total_price" class="p_value"/> </div>
+        <div><span class="p_name">created_date:</span> <input type="text" id="created_date" name="created_date" class="p_value"/> </div>
+        <div><span class="p_name">order_country:</span> <input type="text" id="order_country" name="order_country" class="p_value"/> </div>
+        <div><span class="p_name">order_city:</span> <input type="text" id="order_city" name="order_city" class="p_value"/> </div>
+        <div><span class="p_name">order_zipcode:</span> <input type="text" id="order_zipcode" name="order_zipcode" class="p_value"/> </div>
+        <div><input id="add_or_update_btn" type="submit" value="add"/></div>
+    </form>
+</div>
+
+</body>
+
+
+</html>

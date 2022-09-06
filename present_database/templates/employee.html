@@ -1,0 +1,118 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<script>
+
+    function toUpdate(ssn,first_name,last_name,e_id,d_id,department_name,employee_time_zone,employee_authority){
+        document.getElementById("add_or_update_form").action="/employee_update";
+        document.getElementById("ssn").value=ssn;
+        document.getElementById("first_name").value=first_name;
+        document.getElementById("last_name").value=last_name;
+        document.getElementById("e_id").value=e_id;
+        document.getElementById("d_id").value=d_id;
+
+        document.getElementById("department_name").value=department_name;
+        document.getElementById("employee_time_zone").value=employee_time_zone;
+        document.getElementById("employee_authority").value=employee_authority;
+        document.getElementById("add_or_update_btn").value="update";
+    }
+
+</script>
+<body>
+    <p>
+    <table border="1">
+        <tbody>
+                <tr bgcolor="lightgray">
+                    <td><a href="/">INDEX</a></td>
+                    <td><a href="employee">EMPLOYEE</a></td>
+	                	<td><a href="department">DEPARTMENT_PRODUCT</a></td>
+	                	<td><a href="customer">CUSTOMER</a></td>
+	                	<td><a href="product">PRODUCT</a></td>
+	                	<td><a href="deal">DEAL</a></td>
+	                	<td><a href="cart">CART</a></td>
+	                	<td><a href="order">ORDER</a></td>
+      							<tr/>
+      					<tr bgcolor="lightgray">
+	                	<td><a href="order_manage">ORDER_MANAGE</a></td>
+	                	<td><a href="create_c_o">ORDER_FROM_CART</a></td>
+	                	<td><a href="create_p_o">ORDER_FROM_PRODUCT</a></td>
+	                	<td><a href="select">SELECT</a></td>
+	                	<td><a href="show">SHOW</a></td>
+	                	<td><a href="product_manage">PRODUCT_MANAGE</a></td>
+	                	<td><a href="deside">DESIDE</a></td>
+	                	<td><a href="monitor">MONITOR</a></td>
+
+                </tr>
+        </tbody>
+    </table>
+    </p>
+
+    <h1>employee</h1>
+
+    <table border="1">
+        <thead>
+            <tr bgcolor="#f0f8ff">
+                <td>ssn</td>
+                <td>first name</td>
+                <td>last name</td>
+                <td>employee id</td>
+                <td>department id</td>
+                <td>department name</td>
+                <td>time zone</td>
+                <td>authority</td>
+                 <td>operation</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datas %}
+                <tr>
+                    <td>{{ data.ssn }}</td>
+                    <td>{{ data.first_name }}</td>
+                    <td>{{ data.last_name }}</td>
+                    <td>{{ data.e_id }}</td>
+                    <td>{{ data.d_id }}</td>
+                    <td>{{ data.department_name }}</td>
+                    <td>{{ data.employee_time_zone }}</td>
+                    <td>{{ data.employee_authority }}</td>
+                     <td>
+                        <input type="button" value="update" onclick="javascript:toUpdate('{{data.ssn}}','{{data.first_name}}','{{data.last_name}}',
+                        '{{data.e_id}}','{{data.d_id}}','{{data.department_name}}','{{data.employee_time_zone}}',
+                        '{{data.employee_authority}}');"/>
+                        <a href="/employee_delete?ssn={{data.ssn}}">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<!--    <div>-->
+<!--    {% for n in data %}-->
+<!--    <div>{{n}}</div>-->
+<!--    {% endfor %}-->
+<!--    </div>-->
+
+<hr/>
+<div>
+
+    <form id="add_or_update_form" action="/employee_add" method="post">
+        <div><span class="p_name">ssn:</span> <input type="text" id="ssn" name="ssn" class="p_value"/> </div>
+        <div><span class="p_name">first_name:</span> <input type="text" id="first_name" name="first_name" class="p_value"/> </div>
+        <div><span class="p_name">last_name:</span> <input type="text" id="last_name" name="last_name" class="p_value"/> </div>
+        <div><span class="p_name">e_id:</span> <input type="text" id="e_id" name="e_id" class="p_value"/> </div>
+        <div><span class="p_name">d_id:</span> <input type="text" id="d_id" name="d_id" class="p_value"/> </div>
+        <div><span class="p_name">department_name:</span> <input type="text" id="department_name" name="department_name" class="p_value"/> </div>
+        <div><span class="p_name">employee_time_zone:</span> <input type="text" id="employee_time_zone" name="employee_time_zone" class="p_value"/> </div>
+        <div><span class="p_name">employee_authority:</span> <input type="text" id="employee_authority" name="employee_authority" class="p_value"/> </div>
+        <div><input id="add_or_update_btn" type="submit" value="add"/></div>
+    </form>
+</div>
+
+</body>
+
+
+</html>

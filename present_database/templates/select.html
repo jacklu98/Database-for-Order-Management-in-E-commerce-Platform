@@ -1,0 +1,93 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<script>
+
+    function toUpdate(pid,customer_id){
+        document.getElementById("add_or_update_form").action="/select_update";
+        document.getElementById("p_id").value=pid;
+        document.getElementById("customer_id").value=customer_id;
+        document.getElementById("p_id_old").value=pid;
+        document.getElementById("customer_id_old").value=customer_id;
+        document.getElementById("add_or_update_btn").value="update";
+    }
+
+</script>
+<body>
+    <p>
+    <table border="1">
+        <tbody>
+                <tr bgcolor="lightgray">
+                    <td><a href="/">INDEX</a></td>
+                    <td><a href="employee">EMPLOYEE</a></td>
+	                	<td><a href="department">DEPARTMENT_PRODUCT</a></td>
+	                	<td><a href="customer">CUSTOMER</a></td>
+	                	<td><a href="product">PRODUCT</a></td>
+	                	<td><a href="deal">DEAL</a></td>
+	                	<td><a href="cart">CART</a></td>
+	                	<td><a href="order">ORDER</a></td>
+      							<tr/>
+      					<tr bgcolor="lightgray">
+	                	<td><a href="order_manage">ORDER_MANAGE</a></td>
+	                	<td><a href="create_c_o">ORDER_FROM_CART</a></td>
+	                	<td><a href="create_p_o">ORDER_FROM_PRODUCT</a></td>
+	                	<td><a href="select">SELECT</a></td>
+	                	<td><a href="show">SHOW</a></td>
+	                	<td><a href="product_manage">PRODUCT_MANAGE</a></td>
+	                	<td><a href="deside">DESIDE</a></td>
+	                	<td><a href="monitor">MONITOR</a></td>
+                </tr>
+        </tbody>
+    </table>
+    </p>
+
+    <h1>select</h1>
+
+    <table border="1">
+        <thead>
+            <tr bgcolor="#f0f8ff">
+                <td>product id</td>
+                <td>customer id</td>
+                <td>operation</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datas %}
+                <tr>
+                    <td>{{ data.p_id }}</td>
+                    <td>{{ data.customer_id }}</td>
+                    <td>
+                        <input type="button" value="update" onclick="javascript:toUpdate({{ data.p_id }},{{ data.customer_id }});"/>
+                        <a href="/select_delete?p_id={{data.p_id}}&customer_id={{ data.customer_id }}">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+    {% for n in data %}
+    <div>{{n}}</div>
+    {% endfor %}
+    </div>
+
+<div>
+    <form id="add_or_update_form" action="/select_add" method="post">
+        <div><span class="p_name">p_id:</span> <input type="text" id="p_id" name="p_id" class="p_value"/> </div>
+        <div><span class="p_name">customer_id:</span> <input type="text" id="customer_id" name="customer_id" class="p_value"/> </div>
+        <input type="hidden" id="p_id_old" name="p_id_old"/>
+        <input type="hidden" id="customer_id_old" name="customer_id_old"/>
+        <div><input id="add_or_update_btn" type="submit" value="add"/></div>
+    </form>
+</div>
+
+
+</body>
+
+
+</html>
